@@ -29,49 +29,26 @@ public class PersonnelDAO extends DAO<Personnel> implements Serializable{
 		
 		return null;
 	}
-	public Personnel read(String path) {
+	public void read(String path) throws FileNotFoundException, ClassNotFoundException {
 		// TODO Auto-generated method stub
-		return null;
+		this.SerialReader(path);
 	}
 	@SuppressWarnings("unchecked")
-	public Personnel updatet(Personnel p, Map<String, Object>params) {
+	public Personnel update(Personnel p, Map<String, Object>map) {
 		// TODO Auto-generated method stub
+		Personnel p2 = null;
 		if (!groupe.isEmpty()) {
-	          String nom = "";
-	          if (params.containsKey("nom")) {
-	              nom = (String) params.get("nom");
-	          } else {
-	              nom = p.getNom();
-	          }
-	          String prenom = "";
-	          if (params.containsKey("prenom")) {
-	              prenom = (String) params.get("prenom");
-	          } else {
-	              prenom = p.getPrenom();
-	          }
-	          String fonction = "";
-	          if (params.containsKey("fonction")) {
-	              fonction = (String) params.get("fonction");
-	          } else {
-	              fonction = p.getFonction();
-	          }
-	          java.time.LocalDate dateN;
-	          if (params.containsKey("dateN")) {
-	            dateN = (LocalDate) params.get("dateN");
-	          } else {
-	            dateN = p.getDate_naissance();
-	          }
-	          ArrayList<String> num;
-	          if (params.containsKey("num")) {
-	              num = (ArrayList<String>) params.get("num");
-	          } else {
-	              num = p.getNumero_tel();
-	          }
-	          Personnel pp = (Personnel) new Personnel.Builder(
+	          String nom = (String) map.get("nom");
+	          String prenom = (String) map.get("prenom");
+	          String fonction = (String) map.get("fonction");
+	          java.time.LocalDate dateN = (LocalDate) map.get("dateN");
+	          ArrayList<String> num = (ArrayList<String>) map.get("num");
+	          p2 = (Personnel) new Personnel.Builder(
 	              nom, prenom, fonction, dateN).build();
-	          groupe.add(p);
+	          groupe.add(p2);
+	  		return p2;
 	      }
-		return null;
+		else return null;
 	}
 
 	public void delete(Personnel p, String path) {

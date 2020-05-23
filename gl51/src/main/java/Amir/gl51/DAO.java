@@ -6,11 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Map;
 
 public abstract class  DAO<T> {
 	public abstract T create(T obj, String path) throws FileNotFoundException, IOException;
-	public abstract T read(String path);
-	public abstract T updatet(T obj);
+	public abstract void read(String path) throws FileNotFoundException, ClassNotFoundException;
+	public abstract T update(T obj, Map<String, Object>map);
 	public abstract void delete(Personnel p, String path);
 	@SuppressWarnings("unchecked")
 	public T SerialReader(String path) throws FileNotFoundException, ClassNotFoundException {
