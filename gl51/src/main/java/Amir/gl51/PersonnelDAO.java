@@ -14,10 +14,8 @@ public class PersonnelDAO extends DAO<Personnel> implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7493448686678914037L;
-	private ArrayList<Personnel> groupe;
-	public PersonnelDAO() {
-		this.groupe = new ArrayList<Personnel>();
-	}
+	private ArrayList<Personnel> groupe = new ArrayList<Personnel>();
+	
 	public Personnel create(Personnel per, String path) throws FileNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		groupe.add(per);

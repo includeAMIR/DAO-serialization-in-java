@@ -18,6 +18,10 @@ public class CompositePersonnel implements InterfacePersonnel,  Serializable{
 	/**
 	 * 
 	 */
+	private double ID;
+	public CompositePersonnel(double ID) {
+		this.ID = ID;
+	}
 	private final ArrayList<InterfacePersonnel> groupe_personnel = new ArrayList<InterfacePersonnel>();
 	public void print() {
 		for(InterfacePersonnel groupe : this.groupe_personnel) {
@@ -35,9 +39,9 @@ public class CompositePersonnel implements InterfacePersonnel,  Serializable{
 		else 
 			System.out.println("not exist");
 	}
-	public CompositePersonnel getPersonnel() {
+	public double getId() {
 		// TODO Auto-generated method stub
-		return this;
+		return this.ID;
 	}
 	public CompositePersonnel SerialReader(String path) throws FileNotFoundException, ClassNotFoundException {
 		FileInputStream file = new FileInputStream(path);
