@@ -8,10 +8,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public abstract class  DAO<T> {
-	public abstract T create(T obj);
-	public abstract T find(String path);
+	public abstract T create(T obj, String path) throws FileNotFoundException, IOException;
+	public abstract T read(String path);
 	public abstract T updatet(T obj);
-	public abstract void delete(T obj);
+	public abstract void delete(Personnel p, String path);
 	@SuppressWarnings("unchecked")
 	public T SerialReader(String path) throws FileNotFoundException, ClassNotFoundException {
 		FileInputStream file = new FileInputStream(path);
