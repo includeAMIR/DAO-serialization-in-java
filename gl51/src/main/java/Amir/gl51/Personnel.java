@@ -60,6 +60,10 @@ public final class Personnel implements InterfacePersonnel, Serializable {
 			this.numero_tel.add(nouveau_num);
 			return this;
 		}
+		public Builder AddAllNum(ArrayList<String> nouveau_num) {
+			this.numero_tel.addAll(nouveau_num);
+			return this;
+		}
 		public Personnel build() {
 			return new Personnel(this);
 		}

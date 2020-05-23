@@ -1,12 +1,8 @@
 package Amir.gl51;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -44,7 +40,7 @@ public class PersonnelDAO extends DAO<Personnel> implements Serializable{
 	          java.time.LocalDate dateN = (LocalDate) map.get("dateN");
 	          ArrayList<String> num = (ArrayList<String>) map.get("num");
 	          p2 = (Personnel) new Personnel.Builder(
-	              nom, prenom, fonction, dateN).build();
+	              nom, prenom, fonction, dateN).AddAllNum(num).build();
 	          groupe.add(p2);
 	  		return p2;
 	      }

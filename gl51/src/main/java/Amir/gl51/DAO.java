@@ -12,7 +12,7 @@ public abstract class  DAO<T> {
 	public abstract T create(T obj, String path) throws FileNotFoundException, IOException;
 	public abstract void read(String path) throws FileNotFoundException, ClassNotFoundException;
 	public abstract T update(T obj, Map<String, Object>map);
-	public abstract void delete(Personnel p, String path);
+	public abstract void delete(T obj, String path);
 	@SuppressWarnings("unchecked")
 	public T SerialReader(String path) throws FileNotFoundException, ClassNotFoundException {
 		FileInputStream file = new FileInputStream(path);
