@@ -23,23 +23,29 @@ public class CompositePersonnelDAO extends DAO<CompositePersonnel> implements Se
 	}
 
 	@Override
-	public void read(String path) throws FileNotFoundException, ClassNotFoundException {
-		this.SerialReader(path);
+	public CompositePersonnel read(String path) throws FileNotFoundException, ClassNotFoundException {
+		return this.SerialReader(path);
 	}
 
 	@Override
-	public CompositePersonnel update(CompositePersonnel obj, Map<String, Object> map) {
+	public void update(CompositePersonnel obj, String path) {
 		// TODO Auto-generated method stub
 		if(!composite.isEmpty()) {
 			@SuppressWarnings("unchecked")
-			ArrayList<CompositePersonnel> cp = (ArrayList<CompositePersonnel>)map.get("groupe_personnel");
+			ArrayList<CompositePersonnel> cp = composite;
 			for(CompositePersonnel p : cp) {
-				obj.Add(p);
+				obj.Add(p.getGroupePersonnel());
+				try {
+					SerialWriter(path);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			return obj;
 		}
-		else
-		return null;
 	}
 
 	@Override

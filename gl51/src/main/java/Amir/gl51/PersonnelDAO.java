@@ -23,26 +23,32 @@ public class PersonnelDAO extends DAO<Personnel> implements Serializable{
 		
 		return null;
 	}
-	public void read(String path) throws FileNotFoundException, ClassNotFoundException {
+	public Personnel read(String path) throws FileNotFoundException, ClassNotFoundException {
 		// TODO Auto-generated method stub
-		this.SerialReader(path);
+		return this.SerialReader(path);
 	}
 	@SuppressWarnings("unchecked")
-	public Personnel update(Personnel p, Map<String, Object>map) {
+	public void update(Personnel p, String path) {
 		// TODO Auto-generated method stub
 		Personnel p2 = null;
-		if (!groupe.isEmpty()) {
-	          String nom = (String) map.get("nom");
-	          String prenom = (String) map.get("prenom");
-	          String fonction = (String) map.get("fonction");
-	          java.time.LocalDate dateN = (LocalDate) map.get("dateN");
-	          ArrayList<String> num = (ArrayList<String>) map.get("num");
-	          p2 = (Personnel) new Personnel.Builder(
-	              nom, prenom, fonction, dateN).AddAllNum(num).build();
-	          groupe.add(p2);
-	  		return p2;
-	      }
-		else return null;
+		String nom = p.getNom();
+		String prenom = p.getPrenom();
+		String fonction = p.getFonction();
+		java.time.LocalDate dateN = p.getDate_naissance();
+		ArrayList<String> num = p.getNumero_tel();
+		groupe.remove(p);
+		p2 = (Personnel) new Personnel.Builder(nom, prenom, fonction, dateN).AddAllNum(num).build();
+		delete(p, path);
+		groupe.add(p2);
+		try {
+			p2.SerialWriter(path);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void delete(Personnel p, String path) {

@@ -22,7 +22,14 @@ public class CompositePersonnel implements InterfacePersonnel,  Serializable{
 	public CompositePersonnel(double ID) {
 		this.ID = ID;
 	}
+	public CompositePersonnel() {
+		// TODO Auto-generated constructor stub
+	}
 	private final ArrayList<InterfacePersonnel> groupe_personnel = new ArrayList<InterfacePersonnel>();
+	
+	public CompositePersonnel getGroupePersonnel() {
+		return this;
+	}
 	public void print() {
 		for(InterfacePersonnel groupe : this.groupe_personnel) {
 			groupe.print();

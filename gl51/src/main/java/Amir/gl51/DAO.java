@@ -10,8 +10,8 @@ import java.util.Map;
 
 public abstract class  DAO<T> {
 	public abstract T create(T obj, String path) throws FileNotFoundException, IOException;
-	public abstract void read(String path) throws FileNotFoundException, ClassNotFoundException;
-	public abstract T update(T obj, Map<String, Object>map);
+	public abstract T read(String path) throws FileNotFoundException, ClassNotFoundException;
+	public abstract void update(T obj, String path);
 	public abstract void delete(T obj, String path);
 	@SuppressWarnings("unchecked")
 	public T SerialReader(String path) throws FileNotFoundException, ClassNotFoundException {
