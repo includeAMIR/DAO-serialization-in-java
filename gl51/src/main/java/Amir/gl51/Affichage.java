@@ -1,9 +1,15 @@
 package Amir.gl51;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Affichage implements Serializable {
+public class Affichage implements Serializable{
 	/**
 	 * 
 	 */
@@ -20,9 +26,9 @@ public class Affichage implements Serializable {
 		public GroupeIterator() {
 			for(int i=0; i<groupe.size();i++) {
 				if(groupe.get(i) instanceof CompositePersonnel) {
-					for(InterfacePersonnel ip : groupe.get(i).getPersonnel().groupe_personnel) {
+					/*for(InterfacePersonnel ip : groupe.get(i).getPersonnel()) {
 						groupe.add(ip);
-					}
+					}*/
 				}
 			}
 		}
@@ -44,6 +50,31 @@ public class Affichage implements Serializable {
 		public void remove() {
 			// TODO Auto-generated method stub
 			
+		}
+	}
+	public Affichage SerialReader(String path) throws FileNotFoundException, ClassNotFoundException {
+		FileInputStream file = new FileInputStream(path);
+		Affichage Aff = null;
+		try {
+			@SuppressWarnings("resource")
+			ObjectInputStream read = new ObjectInputStream(file);
+			Aff = (Affichage)read.readObject();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Aff;
+	}
+	public void SerialWriter(String path) throws FileNotFoundException,IOException {
+		FileOutputStream file = new FileOutputStream(path);
+		try {
+			ObjectOutputStream write = new ObjectOutputStream(file);
+			write.writeObject(this);
+			write.flush();
+			write.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

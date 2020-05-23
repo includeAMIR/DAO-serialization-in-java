@@ -1,5 +1,11 @@
 package Amir.gl51;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -32,6 +38,31 @@ public class CompositePersonnel implements InterfacePersonnel,  Serializable{
 	public CompositePersonnel getPersonnel() {
 		// TODO Auto-generated method stub
 		return this;
+	}
+	public CompositePersonnel SerialReader(String path) throws FileNotFoundException, ClassNotFoundException {
+		FileInputStream file = new FileInputStream(path);
+		CompositePersonnel Composite = null;
+		try {
+			@SuppressWarnings("resource")
+			ObjectInputStream read = new ObjectInputStream(file);
+			Composite = (CompositePersonnel)read.readObject();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Composite;
+	}
+	public void SerialWriter(String path) throws FileNotFoundException,IOException {
+		FileOutputStream file = new FileOutputStream(path);
+		try {
+			ObjectOutputStream write = new ObjectOutputStream(file);
+			write.writeObject(this);
+			write.flush();
+			write.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -1,5 +1,11 @@
 package Amir.gl51;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -73,4 +79,30 @@ public final class Personnel implements InterfacePersonnel, Serializable {
 		}
 		System.out.println("****************************************************");
 	}
+	public Personnel SerialReader(String path) throws FileNotFoundException, ClassNotFoundException {
+		FileInputStream file = new FileInputStream(path);
+		Personnel p = null;
+		try {
+			@SuppressWarnings("resource")
+			ObjectInputStream read = new ObjectInputStream(file);
+			p = (Personnel)read.readObject();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return p;
+	}
+	public void SerialWriter(String path) throws FileNotFoundException,IOException {
+		FileOutputStream file = new FileOutputStream(path);
+		try {
+			ObjectOutputStream write = new ObjectOutputStream(file);
+			write.writeObject(this);
+			write.flush();
+			write.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }
